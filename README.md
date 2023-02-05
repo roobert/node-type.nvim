@@ -1,4 +1,4 @@
-# node-type.nvim [WIP]
+# :globe_with_meridians: node-type.nvim
 
 ![node-type screenshot](https://user-images.githubusercontent.com/226654/216843214-50cace9a-a6dc-4654-aa36-bffc4aba1856.gif)
 
