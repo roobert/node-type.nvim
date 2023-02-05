@@ -91,27 +91,29 @@ local parse_lsp_node_type = function()
 
 	local first_line_fingerprint_components = vim.split(first_line_fingerprint, " ")
 
-	local kind
+	local node_kind
 
 	if first_line_fingerprint_components[2] == "->" then
-		kind = first_line_fingerprint_components[3]
+		node_kind = first_line_fingerprint_components[3]
 	else
-		kind = first_line_fingerprint_components[2]
-		if kind then
-			kind = string.match(kind, "(%w*)")
+		node_kind = first_line_fingerprint_components[2]
+		if node_kind then
+			node_kind = string.match(node_kind, "(%w*)")
 		end
 	end
 
-	if kind == nil then
-		kind = "unknown"
-	end
-
-	return string.format("%s %s", kind, node_type)
+	return string.format("%s %s", node_kind, node_type)
 end
 
 M.statusline = function()
 	local lsp_node_type, treesitter_node_type = M.get()
-	return string.format("%s / %s", lsp_node_type, treesitter_node_type)
+
+	local delimiter = ""
+	if lsp_node_type ~= "" then
+		delimiter = " / "
+	end
+
+	return string.format("%s%s%s", lsp_node_type, delimiter, treesitter_node_type)
 end
 
 M.get = function()
