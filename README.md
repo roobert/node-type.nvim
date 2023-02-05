@@ -6,9 +6,9 @@ A NeoVIM plugin to show the currently selected node type from lsp and treesitter
 information.
 
 The demo shows this plugin being used in several ways:
-* using the lualine statusline integration to show the node-type info in the statusline
-* via a key-binding
-* via a call to the plugin api
+* Using the lualine statusline integration to show the node-type info in the statusline
+* Via a key-binding
+* Via a call to the plugin api
 
 ## Installation
 
