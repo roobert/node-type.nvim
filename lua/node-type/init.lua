@@ -64,13 +64,13 @@ local parse_lsp_node_type = function()
 	local contents = M.lsp_node_type_data.contents
 
 	if contents == nil then
-		return ""
+		return nil, nil
 	end
 
 	local lsp_node_type_markdown = contents.value
 
 	if lsp_node_type_markdown == nil then
-		return ""
+		return nil, nil
 	end
 
 	-- Example LSP responses..
@@ -102,25 +102,33 @@ local parse_lsp_node_type = function()
 		end
 	end
 
-	return string.format("%s %s", node_kind, node_type)
+	return node_kind, node_type
 end
 
 M.statusline = function()
-	local lsp_node_type, treesitter_node_type = M.get()
+	local lsp_node_kind, lsp_node_type, treesitter_node_type = M.get()
 
 	local delimiter = ""
-	if lsp_node_type ~= "" then
+	if lsp_node_type then
 		delimiter = " / "
 	end
 
-	return string.format("%s%s%s", lsp_node_type, delimiter, treesitter_node_type)
+	if not lsp_node_kind then
+		lsp_node_kind = ""
+	end
+
+	if not lsp_node_type then
+		lsp_node_type = ""
+	end
+
+	return string.format("%s %s%s%s", lsp_node_kind, lsp_node_type, delimiter, treesitter_node_type)
 end
 
 M.get = function()
 	M.lsp_update_node_type()
 	local treesitter_node_type = M.treesitter_get_node_type()
-	local lsp_node_type = parse_lsp_node_type()
-	return lsp_node_type, treesitter_node_type
+	local lsp_node_kind, lsp_node_type = parse_lsp_node_type()
+	return lsp_node_kind, lsp_node_type, treesitter_node_type
 end
 
 M.setup = function()
