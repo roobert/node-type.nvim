@@ -137,7 +137,7 @@ M.setup = function()
 	vim.api.nvim_set_keymap(
 		"n",
 		"<leader>n",
-		'<CMD>lua print(vim.inspect(require("node-type").get()))<CR>',
+		'<CMD>lua print(vim.inspect(require("node-type").statusline()))<CR>',
 		{ noremap = true, silent = true }
 	)
 end
