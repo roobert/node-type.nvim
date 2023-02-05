@@ -5,6 +5,11 @@
 A NeoVIM plugin to show the currently selected node type from lsp and treesitter
 information.
 
+The demo shows this plugin being used in several ways:
+* using the lualine statusline integration to show the node-type info in the statusline
+* via a key-binding
+* via a call to the plugin api
+
 ## Installation
 
 ### Lazy
@@ -31,18 +36,21 @@ use({
 
 ## Usage
 
-It's possible to use this plugin either via a key-binding, the function interface, or as
-a statusline component.
-
 The default binding is `<leader>n`.
 
 As a lualine statusline component:
 
-```
+``` lua
 require('lualine').setup {
   sections = {
       lualine_x = { require("node-type").statusline }
   }
 }
+```
+
+Via the API:
+
+``` lua
+require("node-type").get()
 ```
 
