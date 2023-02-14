@@ -41,7 +41,7 @@ M.lsp_update_node_type = function()
 	local bufname = vim.api.nvim_buf_get_name(bufnr)
 
 	local params = {
-		textDocument = { uri = bufname },
+		textDocument = { uri = "file://"..bufname },
 		position = { line = cursor[1] - 1, character = cursor[2] },
 	}
 
